@@ -1,0 +1,37 @@
+// Function to sign up a user
+function signupUser(event) {
+  event.preventDefault(); // Prevent page refresh
+
+  const name = document.getElementById("signupName").value;
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+
+  if (!name || !email || !password) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  // Check if email already exists
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  if (users.find(user => user.email === email)) {
+    alert("Email already registered. Please login.");
+    return;
+  }
+
+  // Save new user
+  users.push({ name, email, password });
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Signup successful! You can now login.");
+  window.location.href = "login.html";
+}
+
+// Function to log in a user
+function loginUser(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  c
